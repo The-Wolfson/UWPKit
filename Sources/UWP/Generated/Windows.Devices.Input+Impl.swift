@@ -4,5 +4,33 @@ import Foundation
 @_spi(WinRTInternal) @_spi(WinRTImplements) import WindowsFoundation
 import CWinRT
 
+@_spi(WinRTInternal)
 public enum __IMPL_Windows_Devices_Input {
+    public enum PointerDeviceBridge: AbiBridge {
+        public typealias SwiftProjection = PointerDevice
+        public typealias CABI = __x_ABI_CWindows_CDevices_CInput_CIPointerDevice
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CDevices_CInput_CIPointerDevice>?) -> PointerDevice? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+}
+@_spi(WinRTInternal)
+extension PointerDeviceUsage: WinRTBridgeable {
+    public typealias ABI = __x_ABI_CWindows_CDevices_CInput_CPointerDeviceUsage
+    public static func from(abi: ABI) -> Self {
+        .init(usagePage: abi.UsagePage, usage: abi.Usage, minLogical: abi.MinLogical, maxLogical: abi.MaxLogical, minPhysical: abi.MinPhysical, maxPhysical: abi.MaxPhysical, unit: abi.Unit, physicalMultiplier: abi.PhysicalMultiplier)
+    }
+    public func toABI() -> ABI {
+        .from(swift: self)
+    }
+}
+
+@_spi(WinRTInternal)
+public class PointerDeviceMaker: MakeFromAbi {
+    public typealias SwiftType = PointerDevice
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return PointerDevice(fromAbi: abi)
+    }
 }

@@ -4,6 +4,7 @@ import Foundation
 @_spi(WinRTInternal) @_spi(WinRTImplements) import WindowsFoundation
 import CWinRT
 
+@_spi(WinRTInternal)
 public enum __IMPL_Windows_ApplicationModel_DataTransfer {
     public class DataProviderHandlerBridge : WinRTDelegateBridge {
         public typealias Handler = DataProviderHandler
@@ -14,7 +15,7 @@ public enum __IMPL_Windows_ApplicationModel_DataTransfer {
             guard let abi = abi else { return nil }
             let _default = SwiftABI(abi)
             let handler: Handler = { (request) in
-                try! _default.InvokeImpl(request)
+                try _default.Invoke(request)
             }
             return handler
         }
@@ -28,9 +29,185 @@ public enum __IMPL_Windows_ApplicationModel_DataTransfer {
             guard let abi = abi else { return nil }
             let _default = SwiftABI(abi)
             let handler: Handler = { (operation) in
-                try! _default.InvokeImpl(operation)
+                try _default.Invoke(operation)
             }
             return handler
         }
+    }
+    public enum DataPackageBridge: AbiBridge {
+        public typealias SwiftProjection = DataPackage
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackage
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackage>?) -> DataPackage? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum DataPackagePropertySetBridge: AbiBridge {
+        public typealias SwiftProjection = DataPackagePropertySet
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackagePropertySet
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackagePropertySet>?) -> DataPackagePropertySet? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum DataPackagePropertySetViewBridge: AbiBridge {
+        public typealias SwiftProjection = DataPackagePropertySetView
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackagePropertySetView
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackagePropertySetView>?) -> DataPackagePropertySetView? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum DataPackageViewBridge: AbiBridge {
+        public typealias SwiftProjection = DataPackageView
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackageView
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackageView>?) -> DataPackageView? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum DataProviderDeferralBridge: AbiBridge {
+        public typealias SwiftProjection = DataProviderDeferral
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataProviderDeferral
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataProviderDeferral>?) -> DataProviderDeferral? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum DataProviderRequestBridge: AbiBridge {
+        public typealias SwiftProjection = DataProviderRequest
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataProviderRequest
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataProviderRequest>?) -> DataProviderRequest? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum OperationCompletedEventArgsBridge: AbiBridge {
+        public typealias SwiftProjection = OperationCompletedEventArgs
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIOperationCompletedEventArgs
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIOperationCompletedEventArgs>?) -> OperationCompletedEventArgs? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum ShareCompletedEventArgsBridge: AbiBridge {
+        public typealias SwiftProjection = ShareCompletedEventArgs
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareCompletedEventArgs
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareCompletedEventArgs>?) -> ShareCompletedEventArgs? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum ShareProviderBridge: AbiBridge {
+        public typealias SwiftProjection = ShareProvider
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvider
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvider>?) -> ShareProvider? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum ShareProviderOperationBridge: AbiBridge {
+        public typealias SwiftProjection = ShareProviderOperation
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProviderOperation
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProviderOperation>?) -> ShareProviderOperation? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+    public enum ShareTargetInfoBridge: AbiBridge {
+        public typealias SwiftProjection = ShareTargetInfo
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareTargetInfo
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareTargetInfo>?) -> ShareTargetInfo? {
+            guard let abi = abi else { return nil }
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
+        }
+    }
+
+}
+@_spi(WinRTInternal)
+public class DataPackageMaker: MakeFromAbi {
+    public typealias SwiftType = DataPackage
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return DataPackage(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class DataPackagePropertySetMaker: MakeFromAbi {
+    public typealias SwiftType = DataPackagePropertySet
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return DataPackagePropertySet(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class DataPackagePropertySetViewMaker: MakeFromAbi {
+    public typealias SwiftType = DataPackagePropertySetView
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return DataPackagePropertySetView(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class DataPackageViewMaker: MakeFromAbi {
+    public typealias SwiftType = DataPackageView
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return DataPackageView(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class DataProviderDeferralMaker: MakeFromAbi {
+    public typealias SwiftType = DataProviderDeferral
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return DataProviderDeferral(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class DataProviderRequestMaker: MakeFromAbi {
+    public typealias SwiftType = DataProviderRequest
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return DataProviderRequest(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class OperationCompletedEventArgsMaker: MakeFromAbi {
+    public typealias SwiftType = OperationCompletedEventArgs
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return OperationCompletedEventArgs(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class ShareCompletedEventArgsMaker: MakeFromAbi {
+    public typealias SwiftType = ShareCompletedEventArgs
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return ShareCompletedEventArgs(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class ShareProviderMaker: MakeFromAbi {
+    public typealias SwiftType = ShareProvider
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return ShareProvider(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class ShareProviderOperationMaker: MakeFromAbi {
+    public typealias SwiftType = ShareProviderOperation
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return ShareProviderOperation(fromAbi: abi)
+    }
+}
+@_spi(WinRTInternal)
+public class ShareTargetInfoMaker: MakeFromAbi {
+    public typealias SwiftType = ShareTargetInfo
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return ShareTargetInfo(fromAbi: abi)
     }
 }

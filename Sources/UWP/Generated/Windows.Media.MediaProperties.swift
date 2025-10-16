@@ -5,8 +5,6 @@ import Foundation
 @_spi(WinRTInternal) @_spi(WinRTImplements) import WindowsFoundation
 import CWinRT
 
-/// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingquality)
-public typealias AudioEncodingQuality = __x_ABI_CWindows_CMedia_CMediaProperties_CAudioEncodingQuality
 /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapixelformat)
 public typealias MediaPixelFormat = __x_ABI_CWindows_CMedia_CMediaProperties_CMediaPixelFormat
 /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediarotation)
@@ -17,8 +15,6 @@ public typealias MediaThumbnailFormat = __x_ABI_CWindows_CMedia_CMediaProperties
 public typealias SphericalVideoFrameFormat = __x_ABI_CWindows_CMedia_CMediaProperties_CSphericalVideoFrameFormat
 /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.stereoscopicvideopackingmode)
 public typealias StereoscopicVideoPackingMode = __x_ABI_CWindows_CMedia_CMediaProperties_CStereoscopicVideoPackingMode
-/// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingquality)
-public typealias VideoEncodingQuality = __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality
 /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties)
 public final class AudioEncodingProperties : WinRTClass, IMediaEncodingProperties {
     private typealias SwiftABI = __ABI_Windows_Media_MediaProperties.IAudioEncodingProperties
@@ -33,12 +29,6 @@ public final class AudioEncodingProperties : WinRTClass, IMediaEncodingPropertie
     }
 
     @_spi(WinRTInternal)
-    public static func from(abi: ComPtr<__x_ABI_CWindows_CMedia_CMediaProperties_CIAudioEncodingProperties>?) -> AudioEncodingProperties? {
-        guard let abi = abi else { return nil }
-        return .init(fromAbi: WindowsFoundation.IInspectable(abi))
-    }
-
-    @_spi(WinRTInternal)
     public init(fromAbi: WindowsFoundation.IInspectable) {
         super.init(fromAbi)
     }
@@ -46,99 +36,110 @@ public final class AudioEncodingProperties : WinRTClass, IMediaEncodingPropertie
     override public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? {
         return super.queryInterface(iid)
     }
+    private static let _defaultFactory: WindowsFoundation.IActivationFactory = try! RoGetActivationFactory("Windows.Media.MediaProperties.AudioEncodingProperties")
     override public init() {
-        super.init(try! RoActivateInstance(HString("Windows.Media.MediaProperties.AudioEncodingProperties")))
+        super.init(try! Self._defaultFactory.ActivateInstance())
     }
 
-    private static let _IAudioEncodingPropertiesStatics: __ABI_Windows_Media_MediaProperties.IAudioEncodingPropertiesStatics = try! RoGetActivationFactory(HString("Windows.Media.MediaProperties.AudioEncodingProperties"))
+    private static let _IAudioEncodingPropertiesStatics: __ABI_Windows_Media_MediaProperties.IAudioEncodingPropertiesStatics = try! RoGetActivationFactory("Windows.Media.MediaProperties.AudioEncodingProperties")
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.createaac)
-    public static func createAac(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) -> AudioEncodingProperties! {
-        return try! _IAudioEncodingPropertiesStatics.CreateAacImpl(sampleRate, channelCount, bitrate)
+    public static func createAac(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) throws -> AudioEncodingProperties! {
+        return try _IAudioEncodingPropertiesStatics.CreateAac(sampleRate, channelCount, bitrate)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.createaacadts)
-    public static func createAacAdts(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) -> AudioEncodingProperties! {
-        return try! _IAudioEncodingPropertiesStatics.CreateAacAdtsImpl(sampleRate, channelCount, bitrate)
+    public static func createAacAdts(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) throws -> AudioEncodingProperties! {
+        return try _IAudioEncodingPropertiesStatics.CreateAacAdts(sampleRate, channelCount, bitrate)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.createmp3)
-    public static func createMp3(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) -> AudioEncodingProperties! {
-        return try! _IAudioEncodingPropertiesStatics.CreateMp3Impl(sampleRate, channelCount, bitrate)
+    public static func createMp3(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) throws -> AudioEncodingProperties! {
+        return try _IAudioEncodingPropertiesStatics.CreateMp3(sampleRate, channelCount, bitrate)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.createpcm)
-    public static func createPcm(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitsPerSample: UInt32) -> AudioEncodingProperties! {
-        return try! _IAudioEncodingPropertiesStatics.CreatePcmImpl(sampleRate, channelCount, bitsPerSample)
+    public static func createPcm(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitsPerSample: UInt32) throws -> AudioEncodingProperties! {
+        return try _IAudioEncodingPropertiesStatics.CreatePcm(sampleRate, channelCount, bitsPerSample)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.createwma)
-    public static func createWma(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) -> AudioEncodingProperties! {
-        return try! _IAudioEncodingPropertiesStatics.CreateWmaImpl(sampleRate, channelCount, bitrate)
+    public static func createWma(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitrate: UInt32) throws -> AudioEncodingProperties! {
+        return try _IAudioEncodingPropertiesStatics.CreateWma(sampleRate, channelCount, bitrate)
     }
 
-    private static let _IAudioEncodingPropertiesStatics2: __ABI_Windows_Media_MediaProperties.IAudioEncodingPropertiesStatics2 = try! RoGetActivationFactory(HString("Windows.Media.MediaProperties.AudioEncodingProperties"))
+    private static let _IAudioEncodingPropertiesStatics2: __ABI_Windows_Media_MediaProperties.IAudioEncodingPropertiesStatics2 = try! RoGetActivationFactory("Windows.Media.MediaProperties.AudioEncodingProperties")
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.createalac)
-    public static func createAlac(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitsPerSample: UInt32) -> AudioEncodingProperties! {
-        return try! _IAudioEncodingPropertiesStatics2.CreateAlacImpl(sampleRate, channelCount, bitsPerSample)
+    public static func createAlac(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitsPerSample: UInt32) throws -> AudioEncodingProperties! {
+        return try _IAudioEncodingPropertiesStatics2.CreateAlac(sampleRate, channelCount, bitsPerSample)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.createflac)
-    public static func createFlac(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitsPerSample: UInt32) -> AudioEncodingProperties! {
-        return try! _IAudioEncodingPropertiesStatics2.CreateFlacImpl(sampleRate, channelCount, bitsPerSample)
+    public static func createFlac(_ sampleRate: UInt32, _ channelCount: UInt32, _ bitsPerSample: UInt32) throws -> AudioEncodingProperties! {
+        return try _IAudioEncodingPropertiesStatics2.CreateFlac(sampleRate, channelCount, bitsPerSample)
     }
 
     private lazy var _IMediaEncodingProperties: __ABI_Windows_Media_MediaProperties.IMediaEncodingProperties! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.properties)
     public var properties : MediaPropertySet! {
-        get { try! _IMediaEncodingProperties.get_PropertiesImpl() }
+        get { try! _IMediaEncodingProperties.get_Properties() }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.subtype)
     public var subtype : String {
-        get { try! _IMediaEncodingProperties.get_SubtypeImpl() }
-        set { try! _IMediaEncodingProperties.put_SubtypeImpl(newValue) }
+        get { try! _IMediaEncodingProperties.get_Subtype() }
+        set { try! _IMediaEncodingProperties.put_Subtype(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.type)
     public var type : String {
-        get { try! _IMediaEncodingProperties.get_TypeImpl() }
+        get { try! _IMediaEncodingProperties.get_Type() }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.bitrate)
     public var bitrate : UInt32 {
-        get { try! _default.get_BitrateImpl() }
-        set { try! _default.put_BitrateImpl(newValue) }
+        get { try! _default.get_Bitrate() }
+        set { try! _default.put_Bitrate(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.bitspersample)
     public var bitsPerSample : UInt32 {
-        get { try! _default.get_BitsPerSampleImpl() }
-        set { try! _default.put_BitsPerSampleImpl(newValue) }
+        get { try! _default.get_BitsPerSample() }
+        set { try! _default.put_BitsPerSample(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.channelcount)
     public var channelCount : UInt32 {
-        get { try! _default.get_ChannelCountImpl() }
-        set { try! _default.put_ChannelCountImpl(newValue) }
+        get { try! _default.get_ChannelCount() }
+        set { try! _default.put_ChannelCount(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.samplerate)
     public var sampleRate : UInt32 {
-        get { try! _default.get_SampleRateImpl() }
-        set { try! _default.put_SampleRateImpl(newValue) }
+        get { try! _default.get_SampleRate() }
+        set { try! _default.put_SampleRate(newValue) }
     }
 
     private lazy var _IAudioEncodingPropertiesWithFormatUserData: __ABI_Windows_Media_MediaProperties.IAudioEncodingPropertiesWithFormatUserData! = getInterfaceForCaching()
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.setformatuserdata)
+    public func setFormatUserData(_ value: [UInt8]) throws {
+        try _IAudioEncodingPropertiesWithFormatUserData.SetFormatUserData(value)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.getformatuserdata)
+    public func getFormatUserData(_ value: inout [UInt8]) throws {
+        try _IAudioEncodingPropertiesWithFormatUserData.GetFormatUserData(&value)
+    }
+
     private lazy var _IAudioEncodingProperties2: __ABI_Windows_Media_MediaProperties.IAudioEncodingProperties2! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.isspatial)
     public var isSpatial : Bool {
-        get { try! _IAudioEncodingProperties2.get_IsSpatialImpl() }
+        get { try! _IAudioEncodingProperties2.get_IsSpatial() }
     }
 
     private lazy var _IAudioEncodingProperties3: __ABI_Windows_Media_MediaProperties.IAudioEncodingProperties3! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.audioencodingproperties.copy)
     public func copy() throws -> AudioEncodingProperties! {
-        try _IAudioEncodingProperties3.CopyImpl()
+        try _IAudioEncodingProperties3.Copy()
     }
 
     deinit {
@@ -147,215 +148,6 @@ public final class AudioEncodingProperties : WinRTClass, IMediaEncodingPropertie
         _IAudioEncodingPropertiesWithFormatUserData = nil
         _IAudioEncodingProperties2 = nil
         _IAudioEncodingProperties3 = nil
-    }
-}
-
-/// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.containerencodingproperties)
-public final class ContainerEncodingProperties : WinRTClass, IMediaEncodingProperties {
-    private typealias SwiftABI = __ABI_Windows_Media_MediaProperties.IContainerEncodingProperties
-    private typealias CABI = __x_ABI_CWindows_CMedia_CMediaProperties_CIContainerEncodingProperties
-    private lazy var _default: SwiftABI! = getInterfaceForCaching()
-    @_spi(WinRTInternal)
-    override public func _getABI<T>() -> UnsafeMutablePointer<T>? {
-        if T.self == CABI.self {
-            return RawPointer(_default)
-        }
-        return super._getABI()
-    }
-
-    @_spi(WinRTInternal)
-    public static func from(abi: ComPtr<__x_ABI_CWindows_CMedia_CMediaProperties_CIContainerEncodingProperties>?) -> ContainerEncodingProperties? {
-        guard let abi = abi else { return nil }
-        return .init(fromAbi: WindowsFoundation.IInspectable(abi))
-    }
-
-    @_spi(WinRTInternal)
-    public init(fromAbi: WindowsFoundation.IInspectable) {
-        super.init(fromAbi)
-    }
-
-    override public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? {
-        return super.queryInterface(iid)
-    }
-    override public init() {
-        super.init(try! RoActivateInstance(HString("Windows.Media.MediaProperties.ContainerEncodingProperties")))
-    }
-
-    private lazy var _IMediaEncodingProperties: __ABI_Windows_Media_MediaProperties.IMediaEncodingProperties! = getInterfaceForCaching()
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.containerencodingproperties.properties)
-    public var properties : MediaPropertySet! {
-        get { try! _IMediaEncodingProperties.get_PropertiesImpl() }
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.containerencodingproperties.subtype)
-    public var subtype : String {
-        get { try! _IMediaEncodingProperties.get_SubtypeImpl() }
-        set { try! _IMediaEncodingProperties.put_SubtypeImpl(newValue) }
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.containerencodingproperties.type)
-    public var type : String {
-        get { try! _IMediaEncodingProperties.get_TypeImpl() }
-    }
-
-    private lazy var _IContainerEncodingProperties2: __ABI_Windows_Media_MediaProperties.IContainerEncodingProperties2! = getInterfaceForCaching()
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.containerencodingproperties.copy)
-    public func copy() throws -> ContainerEncodingProperties! {
-        try _IContainerEncodingProperties2.CopyImpl()
-    }
-
-    deinit {
-        _IMediaEncodingProperties = nil
-        _default = nil
-        _IContainerEncodingProperties2 = nil
-    }
-}
-
-/// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile)
-public final class MediaEncodingProfile : WinRTClass {
-    private typealias SwiftABI = __ABI_Windows_Media_MediaProperties.IMediaEncodingProfile
-    private typealias CABI = __x_ABI_CWindows_CMedia_CMediaProperties_CIMediaEncodingProfile
-    private lazy var _default: SwiftABI! = getInterfaceForCaching()
-    @_spi(WinRTInternal)
-    override public func _getABI<T>() -> UnsafeMutablePointer<T>? {
-        if T.self == CABI.self {
-            return RawPointer(_default)
-        }
-        return super._getABI()
-    }
-
-    @_spi(WinRTInternal)
-    public static func from(abi: ComPtr<__x_ABI_CWindows_CMedia_CMediaProperties_CIMediaEncodingProfile>?) -> MediaEncodingProfile? {
-        guard let abi = abi else { return nil }
-        return .init(fromAbi: WindowsFoundation.IInspectable(abi))
-    }
-
-    @_spi(WinRTInternal)
-    public init(fromAbi: WindowsFoundation.IInspectable) {
-        super.init(fromAbi)
-    }
-
-    override public init() {
-        super.init(try! RoActivateInstance(HString("Windows.Media.MediaProperties.MediaEncodingProfile")))
-    }
-
-    private static let _IMediaEncodingProfileStatics: __ABI_Windows_Media_MediaProperties.IMediaEncodingProfileStatics = try! RoGetActivationFactory(HString("Windows.Media.MediaProperties.MediaEncodingProfile"))
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createm4a)
-    public static func createM4a(_ quality: AudioEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics.CreateM4aImpl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createmp3)
-    public static func createMp3(_ quality: AudioEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics.CreateMp3Impl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createwma)
-    public static func createWma(_ quality: AudioEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics.CreateWmaImpl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createmp4)
-    public static func createMp4(_ quality: VideoEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics.CreateMp4Impl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createwmv)
-    public static func createWmv(_ quality: VideoEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics.CreateWmvImpl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createfromfileasync)
-    public static func createFromFileAsync(_ file: UWP.AnyIStorageFile!) -> WindowsFoundation.AnyIAsyncOperation<MediaEncodingProfile?>! {
-        return try! _IMediaEncodingProfileStatics.CreateFromFileAsyncImpl(file)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createfromstreamasync)
-    public static func createFromStreamAsync(_ stream: UWP.AnyIRandomAccessStream!) -> WindowsFoundation.AnyIAsyncOperation<MediaEncodingProfile?>! {
-        return try! _IMediaEncodingProfileStatics.CreateFromStreamAsyncImpl(stream)
-    }
-
-    private static let _IMediaEncodingProfileStatics2: __ABI_Windows_Media_MediaProperties.IMediaEncodingProfileStatics2 = try! RoGetActivationFactory(HString("Windows.Media.MediaProperties.MediaEncodingProfile"))
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createwav)
-    public static func createWav(_ quality: AudioEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics2.CreateWavImpl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createavi)
-    public static func createAvi(_ quality: VideoEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics2.CreateAviImpl(quality)
-    }
-
-    private static let _IMediaEncodingProfileStatics3: __ABI_Windows_Media_MediaProperties.IMediaEncodingProfileStatics3 = try! RoGetActivationFactory(HString("Windows.Media.MediaProperties.MediaEncodingProfile"))
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createalac)
-    public static func createAlac(_ quality: AudioEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics3.CreateAlacImpl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createflac)
-    public static func createFlac(_ quality: AudioEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics3.CreateFlacImpl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.createhevc)
-    public static func createHevc(_ quality: VideoEncodingQuality) -> MediaEncodingProfile! {
-        return try! _IMediaEncodingProfileStatics3.CreateHevcImpl(quality)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.audio)
-    public var audio : AudioEncodingProperties! {
-        get { try! _default.get_AudioImpl() }
-        set { try! _default.put_AudioImpl(newValue) }
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.container)
-    public var container : ContainerEncodingProperties! {
-        get { try! _default.get_ContainerImpl() }
-        set { try! _default.put_ContainerImpl(newValue) }
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.video)
-    public var video : VideoEncodingProperties! {
-        get { try! _default.get_VideoImpl() }
-        set { try! _default.put_VideoImpl(newValue) }
-    }
-
-    private lazy var _IMediaEncodingProfile2: __ABI_Windows_Media_MediaProperties.IMediaEncodingProfile2! = getInterfaceForCaching()
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.setaudiotracks)
-    public func setAudioTracks(_ value: WindowsFoundation.AnyIIterable<UWP.AudioStreamDescriptor?>!) throws {
-        try _IMediaEncodingProfile2.SetAudioTracksImpl(value)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.getaudiotracks)
-    public func getAudioTracks() throws -> WindowsFoundation.AnyIVector<UWP.AudioStreamDescriptor?>! {
-        try _IMediaEncodingProfile2.GetAudioTracksImpl()
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.setvideotracks)
-    public func setVideoTracks(_ value: WindowsFoundation.AnyIIterable<UWP.VideoStreamDescriptor?>!) throws {
-        try _IMediaEncodingProfile2.SetVideoTracksImpl(value)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.getvideotracks)
-    public func getVideoTracks() throws -> WindowsFoundation.AnyIVector<UWP.VideoStreamDescriptor?>! {
-        try _IMediaEncodingProfile2.GetVideoTracksImpl()
-    }
-
-    private lazy var _IMediaEncodingProfile3: __ABI_Windows_Media_MediaProperties.IMediaEncodingProfile3! = getInterfaceForCaching()
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.settimedmetadatatracks)
-    public func setTimedMetadataTracks(_ value: WindowsFoundation.AnyIIterable<UWP.TimedMetadataStreamDescriptor?>!) throws {
-        try _IMediaEncodingProfile3.SetTimedMetadataTracksImpl(value)
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile.gettimedmetadatatracks)
-    public func getTimedMetadataTracks() throws -> WindowsFoundation.AnyIVector<UWP.TimedMetadataStreamDescriptor?>! {
-        try _IMediaEncodingProfile3.GetTimedMetadataTracksImpl()
-    }
-
-    deinit {
-        _default = nil
-        _IMediaEncodingProfile2 = nil
-        _IMediaEncodingProfile3 = nil
     }
 }
 
@@ -376,12 +168,6 @@ public final class MediaPropertySet : WinRTClass, IMap, IIterable {
     }
 
     @_spi(WinRTInternal)
-    public static func from(abi: ComPtr<__x_ABI_C__FIMap_2_GUID_IInspectable>?) -> MediaPropertySet? {
-        guard let abi = abi else { return nil }
-        return .init(fromAbi: WindowsFoundation.IInspectable(abi))
-    }
-
-    @_spi(WinRTInternal)
     public init(fromAbi: WindowsFoundation.IInspectable) {
         super.init(fromAbi)
     }
@@ -389,49 +175,50 @@ public final class MediaPropertySet : WinRTClass, IMap, IIterable {
     override public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? {
         return super.queryInterface(iid)
     }
+    private static let _defaultFactory: WindowsFoundation.IActivationFactory = try! RoGetActivationFactory("Windows.Media.MediaProperties.MediaPropertySet")
     override public init() {
-        super.init(try! RoActivateInstance(HString("Windows.Media.MediaProperties.MediaPropertySet")))
+        super.init(try! Self._defaultFactory.ActivateInstance())
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.lookup)
     public func lookup(_ key: Foundation.UUID) -> Any? {
-        try! _default.LookupImpl(key)
+        try! _default.Lookup(key)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.haskey)
     public func hasKey(_ key: Foundation.UUID) -> Bool {
-        try! _default.HasKeyImpl(key)
+        try! _default.HasKey(key)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.getview)
     public func getView() -> WindowsFoundation.AnyIMapView<Foundation.UUID, Any?>? {
-        try! _default.GetViewImpl()
+        try! _default.GetView()
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.insert)
     public func insert(_ key: Foundation.UUID, _ value: Any?) -> Bool {
-        try! _default.InsertImpl(key, value)
+        try! _default.Insert(key, value)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.remove)
     public func remove(_ key: Foundation.UUID) {
-        try! _default.RemoveImpl(key)
+        try! _default.Remove(key)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.clear)
     public func clear() {
-        try! _default.ClearImpl()
+        try! _default.Clear()
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.size)
     public var size : UInt32 {
-        get { try! _default.get_SizeImpl() }
+        get { try! _default.get_Size() }
     }
 
     private lazy var _IIterable: IIterableIKeyValuePairUUID_Any! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediapropertyset.first)
     public func first() -> WindowsFoundation.AnyIIterator<WindowsFoundation.AnyIKeyValuePair<Foundation.UUID, Any?>?>? {
-        try! _IIterable.FirstImpl()
+        try! _IIterable.First()
     }
 
     deinit {
@@ -454,88 +241,23 @@ public final class MediaRatio : WinRTClass {
     }
 
     @_spi(WinRTInternal)
-    public static func from(abi: ComPtr<__x_ABI_CWindows_CMedia_CMediaProperties_CIMediaRatio>?) -> MediaRatio? {
-        guard let abi = abi else { return nil }
-        return .init(fromAbi: WindowsFoundation.IInspectable(abi))
-    }
-
-    @_spi(WinRTInternal)
     public init(fromAbi: WindowsFoundation.IInspectable) {
         super.init(fromAbi)
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaratio.denominator)
     public var denominator : UInt32 {
-        get { try! _default.get_DenominatorImpl() }
-        set { try! _default.put_DenominatorImpl(newValue) }
+        get { try! _default.get_Denominator() }
+        set { try! _default.put_Denominator(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaratio.numerator)
     public var numerator : UInt32 {
-        get { try! _default.get_NumeratorImpl() }
-        set { try! _default.put_NumeratorImpl(newValue) }
+        get { try! _default.get_Numerator() }
+        set { try! _default.put_Numerator(newValue) }
     }
 
     deinit {
-        _default = nil
-    }
-}
-
-/// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.timedmetadataencodingproperties)
-public final class TimedMetadataEncodingProperties : WinRTClass, IMediaEncodingProperties {
-    private typealias SwiftABI = __ABI_Windows_Media_MediaProperties.IMediaEncodingProperties
-    private typealias CABI = __x_ABI_CWindows_CMedia_CMediaProperties_CIMediaEncodingProperties
-    private lazy var _default: SwiftABI! = getInterfaceForCaching()
-    @_spi(WinRTInternal)
-    override public func _getABI<T>() -> UnsafeMutablePointer<T>? {
-        if T.self == CABI.self {
-            return RawPointer(_default)
-        }
-        return super._getABI()
-    }
-
-    @_spi(WinRTInternal)
-    public static func from(abi: ComPtr<__x_ABI_CWindows_CMedia_CMediaProperties_CIMediaEncodingProperties>?) -> TimedMetadataEncodingProperties? {
-        guard let abi = abi else { return nil }
-        return .init(fromAbi: WindowsFoundation.IInspectable(abi))
-    }
-
-    @_spi(WinRTInternal)
-    public init(fromAbi: WindowsFoundation.IInspectable) {
-        super.init(fromAbi)
-    }
-
-    override public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? {
-        return super.queryInterface(iid)
-    }
-    override public init() {
-        super.init(try! RoActivateInstance(HString("Windows.Media.MediaProperties.TimedMetadataEncodingProperties")))
-    }
-
-    private lazy var _ITimedMetadataEncodingProperties: __ABI_Windows_Media_MediaProperties.ITimedMetadataEncodingProperties! = getInterfaceForCaching()
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.timedmetadataencodingproperties.copy)
-    public func copy() throws -> TimedMetadataEncodingProperties! {
-        try _ITimedMetadataEncodingProperties.CopyImpl()
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.timedmetadataencodingproperties.properties)
-    public var properties : MediaPropertySet! {
-        get { try! _default.get_PropertiesImpl() }
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.timedmetadataencodingproperties.subtype)
-    public var subtype : String {
-        get { try! _default.get_SubtypeImpl() }
-        set { try! _default.put_SubtypeImpl(newValue) }
-    }
-
-    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.timedmetadataencodingproperties.type)
-    public var type : String {
-        get { try! _default.get_TypeImpl() }
-    }
-
-    deinit {
-        _ITimedMetadataEncodingProperties = nil
         _default = nil
     }
 }
@@ -554,12 +276,6 @@ public final class VideoEncodingProperties : WinRTClass, IMediaEncodingPropertie
     }
 
     @_spi(WinRTInternal)
-    public static func from(abi: ComPtr<__x_ABI_CWindows_CMedia_CMediaProperties_CIVideoEncodingProperties>?) -> VideoEncodingProperties? {
-        guard let abi = abi else { return nil }
-        return .init(fromAbi: WindowsFoundation.IInspectable(abi))
-    }
-
-    @_spi(WinRTInternal)
     public init(fromAbi: WindowsFoundation.IInspectable) {
         super.init(fromAbi)
     }
@@ -567,100 +283,111 @@ public final class VideoEncodingProperties : WinRTClass, IMediaEncodingPropertie
     override public func queryInterface(_ iid: WindowsFoundation.IID) -> IUnknownRef? {
         return super.queryInterface(iid)
     }
+    private static let _defaultFactory: WindowsFoundation.IActivationFactory = try! RoGetActivationFactory("Windows.Media.MediaProperties.VideoEncodingProperties")
     override public init() {
-        super.init(try! RoActivateInstance(HString("Windows.Media.MediaProperties.VideoEncodingProperties")))
+        super.init(try! Self._defaultFactory.ActivateInstance())
     }
 
-    private static let _IVideoEncodingPropertiesStatics: __ABI_Windows_Media_MediaProperties.IVideoEncodingPropertiesStatics = try! RoGetActivationFactory(HString("Windows.Media.MediaProperties.VideoEncodingProperties"))
+    private static let _IVideoEncodingPropertiesStatics: __ABI_Windows_Media_MediaProperties.IVideoEncodingPropertiesStatics = try! RoGetActivationFactory("Windows.Media.MediaProperties.VideoEncodingProperties")
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.createh264)
-    public static func createH264() -> VideoEncodingProperties! {
-        return try! _IVideoEncodingPropertiesStatics.CreateH264Impl()
+    public static func createH264() throws -> VideoEncodingProperties! {
+        return try _IVideoEncodingPropertiesStatics.CreateH264()
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.creatempeg2)
-    public static func createMpeg2() -> VideoEncodingProperties! {
-        return try! _IVideoEncodingPropertiesStatics.CreateMpeg2Impl()
+    public static func createMpeg2() throws -> VideoEncodingProperties! {
+        return try _IVideoEncodingPropertiesStatics.CreateMpeg2()
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.createuncompressed)
-    public static func createUncompressed(_ subtype: String, _ width: UInt32, _ height: UInt32) -> VideoEncodingProperties! {
-        return try! _IVideoEncodingPropertiesStatics.CreateUncompressedImpl(subtype, width, height)
+    public static func createUncompressed(_ subtype: String, _ width: UInt32, _ height: UInt32) throws -> VideoEncodingProperties! {
+        return try _IVideoEncodingPropertiesStatics.CreateUncompressed(subtype, width, height)
     }
 
-    private static let _IVideoEncodingPropertiesStatics2: __ABI_Windows_Media_MediaProperties.IVideoEncodingPropertiesStatics2 = try! RoGetActivationFactory(HString("Windows.Media.MediaProperties.VideoEncodingProperties"))
+    private static let _IVideoEncodingPropertiesStatics2: __ABI_Windows_Media_MediaProperties.IVideoEncodingPropertiesStatics2 = try! RoGetActivationFactory("Windows.Media.MediaProperties.VideoEncodingProperties")
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.createhevc)
-    public static func createHevc() -> VideoEncodingProperties! {
-        return try! _IVideoEncodingPropertiesStatics2.CreateHevcImpl()
+    public static func createHevc() throws -> VideoEncodingProperties! {
+        return try _IVideoEncodingPropertiesStatics2.CreateHevc()
     }
 
     private lazy var _IMediaEncodingProperties: __ABI_Windows_Media_MediaProperties.IMediaEncodingProperties! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.properties)
     public var properties : MediaPropertySet! {
-        get { try! _IMediaEncodingProperties.get_PropertiesImpl() }
+        get { try! _IMediaEncodingProperties.get_Properties() }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.subtype)
     public var subtype : String {
-        get { try! _IMediaEncodingProperties.get_SubtypeImpl() }
-        set { try! _IMediaEncodingProperties.put_SubtypeImpl(newValue) }
+        get { try! _IMediaEncodingProperties.get_Subtype() }
+        set { try! _IMediaEncodingProperties.put_Subtype(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.type)
     public var type : String {
-        get { try! _IMediaEncodingProperties.get_TypeImpl() }
+        get { try! _IMediaEncodingProperties.get_Type() }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.bitrate)
     public var bitrate : UInt32 {
-        get { try! _default.get_BitrateImpl() }
-        set { try! _default.put_BitrateImpl(newValue) }
+        get { try! _default.get_Bitrate() }
+        set { try! _default.put_Bitrate(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.framerate)
     public var frameRate : MediaRatio! {
-        get { try! _default.get_FrameRateImpl() }
+        get { try! _default.get_FrameRate() }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.height)
     public var height : UInt32 {
-        get { try! _default.get_HeightImpl() }
-        set { try! _default.put_HeightImpl(newValue) }
+        get { try! _default.get_Height() }
+        set { try! _default.put_Height(newValue) }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.pixelaspectratio)
     public var pixelAspectRatio : MediaRatio! {
-        get { try! _default.get_PixelAspectRatioImpl() }
+        get { try! _default.get_PixelAspectRatio() }
     }
 
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.width)
     public var width : UInt32 {
-        get { try! _default.get_WidthImpl() }
-        set { try! _default.put_WidthImpl(newValue) }
+        get { try! _default.get_Width() }
+        set { try! _default.put_Width(newValue) }
     }
 
     private lazy var _IVideoEncodingProperties2: __ABI_Windows_Media_MediaProperties.IVideoEncodingProperties2! = getInterfaceForCaching()
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.setformatuserdata)
+    public func setFormatUserData(_ value: [UInt8]) throws {
+        try _IVideoEncodingProperties2.SetFormatUserData(value)
+    }
+
+    /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.getformatuserdata)
+    public func getFormatUserData(_ value: inout [UInt8]) throws {
+        try _IVideoEncodingProperties2.GetFormatUserData(&value)
+    }
+
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.profileid)
     public var profileId : Int32 {
-        get { try! _IVideoEncodingProperties2.get_ProfileIdImpl() }
-        set { try! _IVideoEncodingProperties2.put_ProfileIdImpl(newValue) }
+        get { try! _IVideoEncodingProperties2.get_ProfileId() }
+        set { try! _IVideoEncodingProperties2.put_ProfileId(newValue) }
     }
 
     private lazy var _IVideoEncodingProperties3: __ABI_Windows_Media_MediaProperties.IVideoEncodingProperties3! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.stereoscopicvideopackingmode)
     public var stereoscopicVideoPackingMode : StereoscopicVideoPackingMode {
-        get { try! _IVideoEncodingProperties3.get_StereoscopicVideoPackingModeImpl() }
+        get { try! _IVideoEncodingProperties3.get_StereoscopicVideoPackingMode() }
     }
 
     private lazy var _IVideoEncodingProperties4: __ABI_Windows_Media_MediaProperties.IVideoEncodingProperties4! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.sphericalvideoframeformat)
     public var sphericalVideoFrameFormat : SphericalVideoFrameFormat {
-        get { try! _IVideoEncodingProperties4.get_SphericalVideoFrameFormatImpl() }
+        get { try! _IVideoEncodingProperties4.get_SphericalVideoFrameFormat() }
     }
 
     private lazy var _IVideoEncodingProperties5: __ABI_Windows_Media_MediaProperties.IVideoEncodingProperties5! = getInterfaceForCaching()
     /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.videoencodingproperties.copy)
     public func copy() throws -> VideoEncodingProperties! {
-        try _IVideoEncodingProperties5.CopyImpl()
+        try _IVideoEncodingProperties5.Copy()
     }
 
     deinit {
@@ -695,22 +422,6 @@ extension IMediaEncodingProperties {
 }
 public typealias AnyIMediaEncodingProperties = any IMediaEncodingProperties
 
-extension UWP.AudioEncodingQuality {
-    public static var auto : UWP.AudioEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CAudioEncodingQuality_Auto
-    }
-    public static var high : UWP.AudioEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CAudioEncodingQuality_High
-    }
-    public static var medium : UWP.AudioEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CAudioEncodingQuality_Medium
-    }
-    public static var low : UWP.AudioEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CAudioEncodingQuality_Low
-    }
-}
-extension UWP.AudioEncodingQuality: @retroactive Hashable, @retroactive Codable {}
-
 extension UWP.MediaPixelFormat {
     public static var nv12 : UWP.MediaPixelFormat {
         __x_ABI_CWindows_CMedia_CMediaProperties_CMediaPixelFormat_Nv12
@@ -722,7 +433,7 @@ extension UWP.MediaPixelFormat {
         __x_ABI_CWindows_CMedia_CMediaProperties_CMediaPixelFormat_P010
     }
 }
-extension UWP.MediaPixelFormat: @retroactive Hashable, @retroactive Codable {}
+extension UWP.MediaPixelFormat: @retroactive Hashable, @retroactive Codable, @retroactive @unchecked Sendable {}
 
 extension UWP.MediaRotation {
     public static var none : UWP.MediaRotation {
@@ -738,7 +449,7 @@ extension UWP.MediaRotation {
         __x_ABI_CWindows_CMedia_CMediaProperties_CMediaRotation_Clockwise270Degrees
     }
 }
-extension UWP.MediaRotation: @retroactive Hashable, @retroactive Codable {}
+extension UWP.MediaRotation: @retroactive Hashable, @retroactive Codable, @retroactive @unchecked Sendable {}
 
 extension UWP.MediaThumbnailFormat {
     public static var bmp : UWP.MediaThumbnailFormat {
@@ -748,7 +459,7 @@ extension UWP.MediaThumbnailFormat {
         __x_ABI_CWindows_CMedia_CMediaProperties_CMediaThumbnailFormat_Bgra8
     }
 }
-extension UWP.MediaThumbnailFormat: @retroactive Hashable, @retroactive Codable {}
+extension UWP.MediaThumbnailFormat: @retroactive Hashable, @retroactive Codable, @retroactive @unchecked Sendable {}
 
 extension UWP.SphericalVideoFrameFormat {
     public static var none : UWP.SphericalVideoFrameFormat {
@@ -761,7 +472,7 @@ extension UWP.SphericalVideoFrameFormat {
         __x_ABI_CWindows_CMedia_CMediaProperties_CSphericalVideoFrameFormat_Equirectangular
     }
 }
-extension UWP.SphericalVideoFrameFormat: @retroactive Hashable, @retroactive Codable {}
+extension UWP.SphericalVideoFrameFormat: @retroactive Hashable, @retroactive Codable, @retroactive @unchecked Sendable {}
 
 extension UWP.StereoscopicVideoPackingMode {
     public static var none : UWP.StereoscopicVideoPackingMode {
@@ -774,39 +485,5 @@ extension UWP.StereoscopicVideoPackingMode {
         __x_ABI_CWindows_CMedia_CMediaProperties_CStereoscopicVideoPackingMode_TopBottom
     }
 }
-extension UWP.StereoscopicVideoPackingMode: @retroactive Hashable, @retroactive Codable {}
-
-extension UWP.VideoEncodingQuality {
-    public static var auto : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Auto
-    }
-    public static var hd1080p : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_HD1080p
-    }
-    public static var hd720p : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_HD720p
-    }
-    public static var wvga : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Wvga
-    }
-    public static var ntsc : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Ntsc
-    }
-    public static var pal : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Pal
-    }
-    public static var vga : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Vga
-    }
-    public static var qvga : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Qvga
-    }
-    public static var uhd2160p : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Uhd2160p
-    }
-    public static var uhd4320p : UWP.VideoEncodingQuality {
-        __x_ABI_CWindows_CMedia_CMediaProperties_CVideoEncodingQuality_Uhd4320p
-    }
-}
-extension UWP.VideoEncodingQuality: @retroactive Hashable, @retroactive Codable {}
+extension UWP.StereoscopicVideoPackingMode: @retroactive Hashable, @retroactive Codable, @retroactive @unchecked Sendable {}
 

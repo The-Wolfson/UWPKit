@@ -16,10 +16,6 @@ private var IID___x_ABI_CWindows_CApplicationModel_CActivation_CIApplicationView
     .init(Data1: 0x930CEF4B, Data2: 0xB829, Data3: 0x40FC, Data4: ( 0x88,0xF4,0x85,0x13,0xE8,0xA6,0x47,0x38 ))// 930CEF4B-B829-40FC-88F4-8513E8A64738
 }
 
-private var IID___x_ABI_CWindows_CApplicationModel_CActivation_CIBackgroundActivatedEventArgs: WindowsFoundation.IID {
-    .init(Data1: 0xAB14BEE0, Data2: 0xE760, Data3: 0x440E, Data4: ( 0xA9,0x1C,0x44,0x79,0x6D,0xE3,0xA9,0x2D ))// AB14BEE0-E760-440E-A91C-44796DE3A92D
-}
-
 private var IID___x_ABI_CWindows_CApplicationModel_CActivation_CILaunchActivatedEventArgs: WindowsFoundation.IID {
     .init(Data1: 0xFBC93E26, Data2: 0xA14A, Data3: 0x4B4F, Data4: ( 0x82,0xB0,0x33,0xBE,0xD9,0x20,0xAF,0x52 ))// FBC93E26-A14A-4B4F-82B0-33BED920AF52
 }
@@ -52,11 +48,12 @@ private var IID___x_ABI_CWindows_CApplicationModel_CActivation_CIViewSwitcherPro
     .init(Data1: 0x33F288A6, Data2: 0x5C2C, Data3: 0x4D27, Data4: ( 0xBA,0xC7,0x75,0x36,0x08,0x8F,0x12,0x19 ))// 33F288A6-5C2C-4D27-BAC7-7536088F1219
 }
 
+@_spi(WinRTInternal)
 public enum __ABI_Windows_ApplicationModel_Activation {
     public class IActivatedEventArgs: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIActivatedEventArgs }
 
-        open func get_KindImpl() throws -> UWP.ActivationKind {
+        open func get_Kind() throws -> UWP.ActivationKind {
             var value: __x_ABI_CWindows_CApplicationModel_CActivation_CActivationKind = .init(0)
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIActivatedEventArgs.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_Kind(pThis, &value))
@@ -64,7 +61,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
             return value
         }
 
-        open func get_PreviousExecutionStateImpl() throws -> UWP.ApplicationExecutionState {
+        open func get_PreviousExecutionState() throws -> UWP.ApplicationExecutionState {
             var value: __x_ABI_CWindows_CApplicationModel_CActivation_CApplicationExecutionState = .init(0)
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIActivatedEventArgs.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_PreviousExecutionState(pThis, &value))
@@ -72,13 +69,13 @@ public enum __ABI_Windows_ApplicationModel_Activation {
             return value
         }
 
-        open func get_SplashScreenImpl() throws -> UWP.SplashScreen? {
+        open func get_SplashScreen() throws -> UWP.SplashScreen? {
             let (value) = try ComPtrs.initialize { valueAbi in
                 _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIActivatedEventArgs.self) { pThis in
                     try CHECKED(pThis.pointee.lpVtbl.pointee.get_SplashScreen(pThis, &valueAbi))
                 }
             }
-            return .from(abi: value)
+            return __IMPL_Windows_ApplicationModel_Activation.SplashScreenBridge.from(abi: value)
         }
 
     }
@@ -137,13 +134,13 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class IActivatedEventArgsWithUser: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIActivatedEventArgsWithUser }
 
-        open func get_UserImpl() throws -> UWP.User? {
+        open func get_User() throws -> UWP.User? {
             let (value) = try ComPtrs.initialize { valueAbi in
                 _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIActivatedEventArgsWithUser.self) { pThis in
                     try CHECKED(pThis.pointee.lpVtbl.pointee.get_User(pThis, &valueAbi))
                 }
             }
-            return .from(abi: value)
+            return __IMPL_Windows_System.UserBridge.from(abi: value)
         }
 
     }
@@ -189,7 +186,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class IApplicationViewActivatedEventArgs: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIApplicationViewActivatedEventArgs }
 
-        open func get_CurrentlyShownApplicationViewIdImpl() throws -> Int32 {
+        open func get_CurrentlyShownApplicationViewId() throws -> Int32 {
             var value: INT32 = 0
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIApplicationViewActivatedEventArgs.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_CurrentlyShownApplicationViewId(pThis, &value))
@@ -237,62 +234,10 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     )
 
     public typealias IApplicationViewActivatedEventArgsWrapper = InterfaceWrapperBase<__IMPL_Windows_ApplicationModel_Activation.IApplicationViewActivatedEventArgsBridge>
-    public class IBackgroundActivatedEventArgs: WindowsFoundation.IInspectable {
-        override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIBackgroundActivatedEventArgs }
-
-        open func get_TaskInstanceImpl() throws -> UWP.AnyIBackgroundTaskInstance? {
-            let (value) = try ComPtrs.initialize { valueAbi in
-                _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIBackgroundActivatedEventArgs.self) { pThis in
-                    try CHECKED(pThis.pointee.lpVtbl.pointee.get_TaskInstance(pThis, &valueAbi))
-                }
-            }
-            return __ABI_Windows_ApplicationModel_Background.IBackgroundTaskInstanceWrapper.unwrapFrom(abi: value)
-        }
-
-    }
-
-    internal static var IBackgroundActivatedEventArgsVTable: __x_ABI_CWindows_CApplicationModel_CActivation_CIBackgroundActivatedEventArgsVtbl = .init(
-        QueryInterface: { IBackgroundActivatedEventArgsWrapper.queryInterface($0, $1, $2) },
-        AddRef: { IBackgroundActivatedEventArgsWrapper.addRef($0) },
-        Release: { IBackgroundActivatedEventArgsWrapper.release($0) },
-        GetIids: {
-            let size = MemoryLayout<WindowsFoundation.IID>.size
-            let iids = CoTaskMemAlloc(UInt64(size) * 3).assumingMemoryBound(to: WindowsFoundation.IID.self)
-            iids[0] = IUnknown.IID
-            iids[1] = IInspectable.IID
-            iids[2] = __ABI_Windows_ApplicationModel_Activation.IBackgroundActivatedEventArgsWrapper.IID
-            $1!.pointee = 3
-            $2!.pointee = iids
-            return S_OK
-        },
-
-        GetRuntimeClassName: {
-            _ = $0
-            let hstring = try! HString("Windows.ApplicationModel.Activation.IBackgroundActivatedEventArgs").detach()
-            $1!.pointee = hstring
-            return S_OK
-        },
-
-        GetTrustLevel: {
-            _ = $0
-            $1!.pointee = TrustLevel(rawValue: 0)
-            return S_OK
-        },
-
-        get_TaskInstance: {
-            guard let __unwrapped__instance = IBackgroundActivatedEventArgsWrapper.tryUnwrapFrom(raw: $0) else { return E_INVALIDARG }
-            let value = __unwrapped__instance.taskInstance
-            let valueWrapper = __ABI_Windows_ApplicationModel_Background.IBackgroundTaskInstanceWrapper(value)
-            valueWrapper?.copyTo($1)
-            return S_OK
-        }
-    )
-
-    public typealias IBackgroundActivatedEventArgsWrapper = InterfaceWrapperBase<__IMPL_Windows_ApplicationModel_Activation.IBackgroundActivatedEventArgsBridge>
     public class ILaunchActivatedEventArgs: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CILaunchActivatedEventArgs }
 
-        open func get_ArgumentsImpl() throws -> String {
+        open func get_Arguments() throws -> String {
             var value: HSTRING?
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CILaunchActivatedEventArgs.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_Arguments(pThis, &value))
@@ -300,7 +245,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
             return .init(from: value)
         }
 
-        open func get_TileIdImpl() throws -> String {
+        open func get_TileId() throws -> String {
             var value: HSTRING?
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CILaunchActivatedEventArgs.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_TileId(pThis, &value))
@@ -358,13 +303,13 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class ILaunchActivatedEventArgs2: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CILaunchActivatedEventArgs2 }
 
-        open func get_TileActivatedInfoImpl() throws -> UWP.TileActivatedInfo? {
+        open func get_TileActivatedInfo() throws -> UWP.TileActivatedInfo? {
             let (value) = try ComPtrs.initialize { valueAbi in
                 _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CILaunchActivatedEventArgs2.self) { pThis in
                     try CHECKED(pThis.pointee.lpVtbl.pointee.get_TileActivatedInfo(pThis, &valueAbi))
                 }
             }
-            return .from(abi: value)
+            return __IMPL_Windows_ApplicationModel_Activation.TileActivatedInfoBridge.from(abi: value)
         }
 
     }
@@ -411,7 +356,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class IPrelaunchActivatedEventArgs: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIPrelaunchActivatedEventArgs }
 
-        open func get_PrelaunchActivatedImpl() throws -> Bool {
+        open func get_PrelaunchActivated() throws -> Bool {
             var value: boolean = 0
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIPrelaunchActivatedEventArgs.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_PrelaunchActivated(pThis, &value))
@@ -462,13 +407,13 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class IProtocolActivatedEventArgs: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIProtocolActivatedEventArgs }
 
-        open func get_UriImpl() throws -> WindowsFoundation.Uri? {
+        open func get_Uri() throws -> WindowsFoundation.Uri? {
             let (value) = try ComPtrs.initialize { valueAbi in
                 _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIProtocolActivatedEventArgs.self) { pThis in
                     try CHECKED(pThis.pointee.lpVtbl.pointee.get_Uri(pThis, &valueAbi))
                 }
             }
-            return .from(abi: value)
+            return __IMPL_Windows_Foundation.UriBridge.from(abi: value)
         }
 
     }
@@ -514,7 +459,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData }
 
-        open func get_CallerPackageFamilyNameImpl() throws -> String {
+        open func get_CallerPackageFamilyName() throws -> String {
             var value: HSTRING?
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_CallerPackageFamilyName(pThis, &value))
@@ -522,13 +467,13 @@ public enum __ABI_Windows_ApplicationModel_Activation {
             return .init(from: value)
         }
 
-        open func get_DataImpl() throws -> WindowsFoundation.ValueSet? {
+        open func get_Data() throws -> WindowsFoundation.ValueSet? {
             let (value) = try ComPtrs.initialize { valueAbi in
                 _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.self) { pThis in
                     try CHECKED(pThis.pointee.lpVtbl.pointee.get_Data(pThis, &valueAbi))
                 }
             }
-            return .from(abi: value)
+            return __IMPL_Windows_Foundation_Collections.ValueSetBridge.from(abi: value)
         }
 
     }
@@ -581,7 +526,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class ISplashScreen: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CISplashScreen }
 
-        internal func get_ImageLocationImpl() throws -> WindowsFoundation.Rect {
+        public func get_ImageLocation() throws -> WindowsFoundation.Rect {
             var value: __x_ABI_CWindows_CFoundation_CRect = .init()
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CISplashScreen.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.get_ImageLocation(pThis, &value))
@@ -589,7 +534,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
             return .from(abi: value)
         }
 
-        internal func add_DismissedImpl(_ handler: TypedEventHandler<UWP.SplashScreen?, Any?>?) throws -> EventRegistrationToken {
+        public func add_Dismissed(_ handler: TypedEventHandler<UWP.SplashScreen?, Any?>?) throws -> EventRegistrationToken {
             var cookie: EventRegistrationToken = .init()
             let handlerWrapper = UWP.__x_ABI_C__FITypedEventHandler_2___x_ABI_CWindows__CApplicationModel__CActivation__CSplashScreen_IInspectableWrapper(handler)
             let _handler = try! handlerWrapper?.toABI { $0 }
@@ -599,7 +544,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
             return cookie
         }
 
-        internal func remove_DismissedImpl(_ cookie: EventRegistrationToken) throws {
+        public func remove_Dismissed(_ cookie: EventRegistrationToken) throws {
             _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CISplashScreen.self) { pThis in
                 try CHECKED(pThis.pointee.lpVtbl.pointee.remove_Dismissed(pThis, cookie))
             }
@@ -610,7 +555,7 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class ITileActivatedInfo: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CITileActivatedInfo }
 
-        internal func get_RecentlyShownNotificationsImpl() throws -> WindowsFoundation.AnyIVectorView<UWP.ShownTileNotification?>? {
+        public func get_RecentlyShownNotifications() throws -> WindowsFoundation.AnyIVectorView<UWP.ShownTileNotification?>? {
             let (value) = try ComPtrs.initialize { valueAbi in
                 _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CITileActivatedInfo.self) { pThis in
                     try CHECKED(pThis.pointee.lpVtbl.pointee.get_RecentlyShownNotifications(pThis, &valueAbi))
@@ -624,13 +569,13 @@ public enum __ABI_Windows_ApplicationModel_Activation {
     public class IViewSwitcherProvider: WindowsFoundation.IInspectable {
         override public class var IID: WindowsFoundation.IID { IID___x_ABI_CWindows_CApplicationModel_CActivation_CIViewSwitcherProvider }
 
-        open func get_ViewSwitcherImpl() throws -> UWP.ActivationViewSwitcher? {
+        open func get_ViewSwitcher() throws -> UWP.ActivationViewSwitcher? {
             let (value) = try ComPtrs.initialize { valueAbi in
                 _ = try perform(as: __x_ABI_CWindows_CApplicationModel_CActivation_CIViewSwitcherProvider.self) { pThis in
                     try CHECKED(pThis.pointee.lpVtbl.pointee.get_ViewSwitcher(pThis, &valueAbi))
                 }
             }
-            return .from(abi: value)
+            return __IMPL_Windows_UI_ViewManagement.ActivationViewSwitcherBridge.from(abi: value)
         }
 
     }

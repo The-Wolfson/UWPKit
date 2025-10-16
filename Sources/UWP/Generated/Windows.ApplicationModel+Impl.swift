@@ -4,160 +4,38 @@ import Foundation
 @_spi(WinRTInternal) @_spi(WinRTImplements) import WindowsFoundation
 import CWinRT
 
+@_spi(WinRTInternal)
 public enum __IMPL_Windows_ApplicationModel {
-    public enum IEnteredBackgroundEventArgsBridge : AbiInterfaceBridge {
-        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CIEnteredBackgroundEventArgs
-        public typealias SwiftABI = __ABI_Windows_ApplicationModel.IEnteredBackgroundEventArgs
-        public typealias SwiftProjection = AnyIEnteredBackgroundEventArgs
-        public static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+    public enum AppDisplayInfoBridge: AbiBridge {
+        public typealias SwiftProjection = AppDisplayInfo
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CIAppDisplayInfo
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CIAppDisplayInfo>?) -> AppDisplayInfo? {
             guard let abi = abi else { return nil }
-            return IEnteredBackgroundEventArgsImpl(abi)
-        }
-
-        public static func makeAbi() -> CABI {
-            let vtblPtr = withUnsafeMutablePointer(to: &__ABI_Windows_ApplicationModel.IEnteredBackgroundEventArgsVTable) { $0 }
-            return .init(lpVtbl: vtblPtr)
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
         }
     }
 
-    fileprivate class IEnteredBackgroundEventArgsImpl: IEnteredBackgroundEventArgs, WinRTAbiImpl {
-        fileprivate typealias Bridge = IEnteredBackgroundEventArgsBridge
-        fileprivate let _default: Bridge.SwiftABI
-        fileprivate var thisPtr: WindowsFoundation.IInspectable { _default }
-        fileprivate init(_ fromAbi: ComPtr<Bridge.CABI>) {
-            _default = Bridge.SwiftABI(fromAbi)
-        }
-
-        /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.applicationmodel.ienteredbackgroundeventargs.getdeferral)
-        fileprivate func getDeferral() throws -> WindowsFoundation.Deferral! {
-            try _default.GetDeferralImpl()
-        }
-
-    }
-
-    public enum ILeavingBackgroundEventArgsBridge : AbiInterfaceBridge {
-        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CILeavingBackgroundEventArgs
-        public typealias SwiftABI = __ABI_Windows_ApplicationModel.ILeavingBackgroundEventArgs
-        public typealias SwiftProjection = AnyILeavingBackgroundEventArgs
-        public static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
+    public enum AppInfoBridge: AbiBridge {
+        public typealias SwiftProjection = AppInfo
+        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CIAppInfo
+        public static func from(abi: ComPtr<__x_ABI_CWindows_CApplicationModel_CIAppInfo>?) -> AppInfo? {
             guard let abi = abi else { return nil }
-            return ILeavingBackgroundEventArgsImpl(abi)
-        }
-
-        public static func makeAbi() -> CABI {
-            let vtblPtr = withUnsafeMutablePointer(to: &__ABI_Windows_ApplicationModel.ILeavingBackgroundEventArgsVTable) { $0 }
-            return .init(lpVtbl: vtblPtr)
+            return .init(fromAbi: WindowsFoundation.IInspectable(abi))
         }
     }
 
-    fileprivate class ILeavingBackgroundEventArgsImpl: ILeavingBackgroundEventArgs, WinRTAbiImpl {
-        fileprivate typealias Bridge = ILeavingBackgroundEventArgsBridge
-        fileprivate let _default: Bridge.SwiftABI
-        fileprivate var thisPtr: WindowsFoundation.IInspectable { _default }
-        fileprivate init(_ fromAbi: ComPtr<Bridge.CABI>) {
-            _default = Bridge.SwiftABI(fromAbi)
-        }
-
-        /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.applicationmodel.ileavingbackgroundeventargs.getdeferral)
-        fileprivate func getDeferral() throws -> WindowsFoundation.Deferral! {
-            try _default.GetDeferralImpl()
-        }
-
+}
+@_spi(WinRTInternal)
+public class AppDisplayInfoMaker: MakeFromAbi {
+    public typealias SwiftType = AppDisplayInfo
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return AppDisplayInfo(fromAbi: abi)
     }
-
-    public enum ISuspendingDeferralBridge : AbiInterfaceBridge {
-        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CISuspendingDeferral
-        public typealias SwiftABI = __ABI_Windows_ApplicationModel.ISuspendingDeferral
-        public typealias SwiftProjection = AnyISuspendingDeferral
-        public static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
-            guard let abi = abi else { return nil }
-            return ISuspendingDeferralImpl(abi)
-        }
-
-        public static func makeAbi() -> CABI {
-            let vtblPtr = withUnsafeMutablePointer(to: &__ABI_Windows_ApplicationModel.ISuspendingDeferralVTable) { $0 }
-            return .init(lpVtbl: vtblPtr)
-        }
+}
+@_spi(WinRTInternal)
+public class AppInfoMaker: MakeFromAbi {
+    public typealias SwiftType = AppInfo
+    public static func from(abi: WindowsFoundation.IInspectable) -> SwiftType {
+        return AppInfo(fromAbi: abi)
     }
-
-    fileprivate class ISuspendingDeferralImpl: ISuspendingDeferral, WinRTAbiImpl {
-        fileprivate typealias Bridge = ISuspendingDeferralBridge
-        fileprivate let _default: Bridge.SwiftABI
-        fileprivate var thisPtr: WindowsFoundation.IInspectable { _default }
-        fileprivate init(_ fromAbi: ComPtr<Bridge.CABI>) {
-            _default = Bridge.SwiftABI(fromAbi)
-        }
-
-        /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.applicationmodel.isuspendingdeferral.complete)
-        fileprivate func complete() throws {
-            try _default.CompleteImpl()
-        }
-
-    }
-
-    public enum ISuspendingEventArgsBridge : AbiInterfaceBridge {
-        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CISuspendingEventArgs
-        public typealias SwiftABI = __ABI_Windows_ApplicationModel.ISuspendingEventArgs
-        public typealias SwiftProjection = AnyISuspendingEventArgs
-        public static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
-            guard let abi = abi else { return nil }
-            return ISuspendingEventArgsImpl(abi)
-        }
-
-        public static func makeAbi() -> CABI {
-            let vtblPtr = withUnsafeMutablePointer(to: &__ABI_Windows_ApplicationModel.ISuspendingEventArgsVTable) { $0 }
-            return .init(lpVtbl: vtblPtr)
-        }
-    }
-
-    fileprivate class ISuspendingEventArgsImpl: ISuspendingEventArgs, WinRTAbiImpl {
-        fileprivate typealias Bridge = ISuspendingEventArgsBridge
-        fileprivate let _default: Bridge.SwiftABI
-        fileprivate var thisPtr: WindowsFoundation.IInspectable { _default }
-        fileprivate init(_ fromAbi: ComPtr<Bridge.CABI>) {
-            _default = Bridge.SwiftABI(fromAbi)
-        }
-
-        /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.applicationmodel.isuspendingeventargs.suspendingoperation)
-        fileprivate var suspendingOperation : SuspendingOperation! {
-            get { try! _default.get_SuspendingOperationImpl() }
-        }
-
-    }
-
-    public enum ISuspendingOperationBridge : AbiInterfaceBridge {
-        public typealias CABI = __x_ABI_CWindows_CApplicationModel_CISuspendingOperation
-        public typealias SwiftABI = __ABI_Windows_ApplicationModel.ISuspendingOperation
-        public typealias SwiftProjection = AnyISuspendingOperation
-        public static func from(abi: ComPtr<CABI>?) -> SwiftProjection? {
-            guard let abi = abi else { return nil }
-            return ISuspendingOperationImpl(abi)
-        }
-
-        public static func makeAbi() -> CABI {
-            let vtblPtr = withUnsafeMutablePointer(to: &__ABI_Windows_ApplicationModel.ISuspendingOperationVTable) { $0 }
-            return .init(lpVtbl: vtblPtr)
-        }
-    }
-
-    fileprivate class ISuspendingOperationImpl: ISuspendingOperation, WinRTAbiImpl {
-        fileprivate typealias Bridge = ISuspendingOperationBridge
-        fileprivate let _default: Bridge.SwiftABI
-        fileprivate var thisPtr: WindowsFoundation.IInspectable { _default }
-        fileprivate init(_ fromAbi: ComPtr<Bridge.CABI>) {
-            _default = Bridge.SwiftABI(fromAbi)
-        }
-
-        /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.applicationmodel.isuspendingoperation.getdeferral)
-        fileprivate func getDeferral() throws -> SuspendingDeferral! {
-            try _default.GetDeferralImpl()
-        }
-
-        /// [Open Microsoft documentation](https://learn.microsoft.com/uwp/api/windows.applicationmodel.isuspendingoperation.deadline)
-        fileprivate var deadline : WindowsFoundation.DateTime {
-            get { try! _default.get_DeadlineImpl() }
-        }
-
-    }
-
 }
