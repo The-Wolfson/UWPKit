@@ -13,9 +13,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Install Swift
+        uses: compnerd/gha-setup-swift@main
+        with:
+          branch: swift-6.3-release
+          tag: 6.3-RELEASE
+
       - name: Generate Bindings
         shell: pwsh
         run: ./generate-bindings.ps1
+
+      - name: Swift Build
+        shell: pwsh
+        run: swift build
 
       - name: Commit
         uses: EndBug/add-and-commit@v10

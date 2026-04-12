@@ -1,23 +1,21 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.3
 
 import PackageDescription
 
 let package = Package(
-    name: "swift-uwp",
+    name: "UWPKit",
     products: [
-        .library(name: "UWP", type: .dynamic, targets: ["UWP"]),
-    ],
-    dependencies: [
-        .package(path: "../swift-cwinrt"),
-        .package(path: "../swift-windowsfoundation"),
+        .library(name: "WindowsFoundation", type: .dynamic, targets: ["WindowsFoundation"]), //Windows.Foundation
+        .library(name: "WindowsData", type: .dynamic, targets: ["WindowsData"]), //Windows.Data
+        .library(name: "WindowsDevices", type: .dynamic, targets: ["WindowsDevices"]), //Windows.Devices
+        .library(name: "WindowsMedia", type: .dynamic, targets: ["WindowsMedia"]), //Windows.Media
+        .library(name: "WindowsStorage", type: .dynamic, targets: ["WindowsStorage"]), //Windows.Storage
     ],
     targets: [
-        .target(
-            name: "UWP",
-            dependencies: [
-                .product(name: "CWinRT", package: "swift-cwinrt"),
-                .product(name: "WindowsFoundation", package: "swift-windowsfoundation"),
-            ]
-        ),
+        .target(name: "WindowsFoundation"),
+        .target(name: "WindowsData"),
+        .target(name: "WindowsDevices"),
+        .target(name: "WindowsMedia"),
+        .target(name: "WindowsStorage"),
     ]
 )

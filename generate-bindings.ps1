@@ -11,6 +11,7 @@ function Get-PackageString {
         return "  <package id=""$($Package.Id)"" version=""$($Package.Version)"" />`n"
     }
 }
+
 function Restore-Nuget {
     param(
         [string]$PackagesDir
