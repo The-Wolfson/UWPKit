@@ -6,7 +6,7 @@
   },
   "projects": [
     "WindowsFoundation",
-    "WindowsStorage"
+    // "WindowsStorage"
   ],
   "include": [
     "Windows.Foundation",
