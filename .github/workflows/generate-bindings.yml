@@ -16,8 +16,8 @@ jobs:
       - name: Install Swift
         uses: compnerd/gha-setup-swift@main
         with:
-          branch: swift-6.3-release
-          tag: 6.3-RELEASE
+          swift-version: swift-6.3-release
+          swift-build: 6.3-RELEASE
 
       - name: Generate Bindings
         shell: pwsh
