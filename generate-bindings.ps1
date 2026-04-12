@@ -127,13 +127,13 @@ function Invoke-SwiftWinRT() {
         exit 1
     }
 
-    $Projections.Projects | ForEach-Object {
-        Copy-Project -OutputLocation $OutputLocation -ProjectName $_
-    }
-
-    if ($Projections.Project) {
-        Copy-Project -OutputLocation $OutputLocation -ProjectName $Projections.Project
-    }
+#    $Projections.Projects | ForEach-Object {
+#        Copy-Project -OutputLocation $OutputLocation -ProjectName $_
+#    }
+#
+#    if ($Projections.Project) {
+#        Copy-Project -OutputLocation $OutputLocation -ProjectName $Projections.Project
+#    }
 }
 $PackagesDir = Join-Path $PSScriptRoot ".packages"
 Restore-Nuget -PackagesDir $PackagesDir
