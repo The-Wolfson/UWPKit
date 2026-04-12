@@ -99,18 +99,18 @@ function Invoke-SwiftWinRT() {
     }
 
     if ($Projections.Package) {
-        Get-WinMDInputs -Package $Package | ForEach-Object {
+        Get-WinMDInputs -Package $Projections.Package | ForEach-Object {
             $RspParams += "-input $($_.FullName)`n"
         }
     }
 
     $Projections.Packages | ForEach-Object {
-        Get-WinMDInputs -Package $Package | ForEach-Object {
+        Get-WinMDInputs -Package $_ | ForEach-Object {
             $RspParams += "-input $($_.FullName)`n"
         }
     }
     $Projections.Dependencies | ForEach-Object {
-        Get-WinMDInputs -Package $Package | ForEach-Object {
+        Get-WinMDInputs -Package $_ | ForEach-Object {
             $RspParams += "-input $($_.FullName)`n"
         }
     }
