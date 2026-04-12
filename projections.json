@@ -6,10 +6,7 @@
   },
   "projects": [
     "WindowsFoundation",
-    "WindowsStorage",
-    "WindowsData",
-    "WindowsDevices",
-    "WindowsMedia"
+    "WindowsStorage"
   ],
   "include": [
     "Windows.Foundation",

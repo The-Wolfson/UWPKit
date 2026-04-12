@@ -11,7 +11,6 @@ function Get-PackageString {
         return "  <package id=""$($Package.Id)"" version=""$($Package.Version)"" />`n"
     }
 }
-
 function Restore-Nuget {
     param(
         [string]$PackagesDir
@@ -41,7 +40,7 @@ function Restore-Nuget {
         New-Item -ItemType Directory -Path "$PSScriptRoot\.packages" | Out-Null
     }
     $PackagesConfigPath = Join-Path $PSScriptRoot ".packages\packages.config"
-    $PackagesConfigContent | Out-File -FilePath $PackagesConfigPath -Encoding ascii
+    $PackagesConfigContent | Out-File -FilePath $PackagesConfigPath
 
     & $NugetDownloadPath restore $PackagesConfigPath -PackagesDirectory $PackagesDir | Out-Null
     if ($LASTEXITCODE -ne 0) {
@@ -74,6 +73,7 @@ function Copy-Project {
         Copy-Item -Path $OutputLocation\Sources\$ProjectName -Destination $ProjectDir -Recurse -Force
     }
 }
+
 
 function Invoke-SwiftWinRT() {
     param(
@@ -114,17 +114,14 @@ function Invoke-SwiftWinRT() {
             $RspParams += "-input $($_.FullName)`n"
         }
     }
-
     # write rsp params to file
     $RspFile = Join-Path $PSScriptRoot "swift-winrt.rsp"
-    $RspParams | Out-File -FilePath $RspFile -Encoding ascii
-    
+    $RspParams | Out-File -FilePath $RspFile
     $SwiftWinRTLocation = "$PackagesDir\TheBrowserCompany.SwiftWinRT.$SwiftWinRTVersion\bin\swiftwinrt.exe"
     if ($env:SwiftWinRTOverride -ne $nul) {
         $SwiftWinRTLocation = $env:SwiftWinRTOverride
     }
     & $SwiftWinRTLocation "@$RspFile"
-    
     if ($LASTEXITCODE -ne 0) {
         Write-Host "swiftwinrt failed with error code $LASTEXITCODE" -ForegroundColor Red
         exit 1
@@ -138,7 +135,6 @@ function Invoke-SwiftWinRT() {
         Copy-Project -OutputLocation $OutputLocation -ProjectName $Projections.Project
     }
 }
-
 $PackagesDir = Join-Path $PSScriptRoot ".packages"
 Restore-Nuget -PackagesDir $PackagesDir
 Invoke-SwiftWinRT -PackagesDir $PackagesDir
