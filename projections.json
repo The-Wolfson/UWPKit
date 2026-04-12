@@ -5,8 +5,7 @@
     "version": "10.0.18362.2005"
   },
   "projects": [
-    "WindowsFoundation",
-    // "WindowsStorage"
+    "WindowsFoundation"
   ],
   "include": [
     "Windows.Foundation",
