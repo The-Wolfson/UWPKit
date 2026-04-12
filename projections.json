@@ -6,33 +6,9 @@
   },
   "project": "UWP",
   "include": [
-    "Windows.ApplicationModel.Activation.LaunchActivatedEventArgs",
-    "Windows.ApplicationModel.Core.AppRestartFailureReason",
-    "Windows.ApplicationModel.DataTransfer.DataPackage",
-    "Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs",
-    "Windows.Foundation.IMemoryBufferReference",
-    "Windows.Foundation.IPropertyValue",
-    "Windows.Graphics",
-    "Windows.Graphics.DirectX.Direct3D11",
-    "Windows.Graphics.Effects",
-    "Windows.Graphics.Imaging",
-    "Windows.Media.Core.MediaSource",
-    "Windows.Media.Playback.MediaPlayer",
-    "Windows.Storage.Streams",
-    "Windows.System.Launcher",
-    "Windows.System.VirtualKeyModifiers",
-    "Windows.UI.Color",
-    "Windows.UI.Composition",
-    "Windows.UI.Core.CoreCursor",
-    "Windows.UI.Core.CoreWindow",
-    "Windows.UI.Text.TextDecorations",
-    "Windows.UI.Text.FontWeights",
-    "Windows.UI.Text.FontStyle",
-    "Windows.UI.Text.FontStretch",
+    "Windows.Media.SpeechSynthesis"
   ],
   "exclude": [
-    "Windows.Devices.Enumeration.Panel",
-    "Windows.Management.Deployment.PackageStatus",
-    "Windows.ApplicationModel.Core.CoreApplication",
+
   ]
 }
