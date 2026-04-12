@@ -83,7 +83,7 @@ function Invoke-SwiftWinRT() {
 
     $SwiftWinRTVersion = Get-SwiftWinRTVersion
     # write generated bindings to a temp directory since swiftwinrt will generate all dependencies and the CWinRT
-    $OutputLocation = Join-Path $PSScriptRoot ".generated"
+    $OutputLocation = Join-Path $PSScriptRoot "Sources"
     if (Test-Path $OutputLocation) {
         Remove-Item -Path $OutputLocation -Recurse -Force
     }
