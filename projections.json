@@ -6,11 +6,9 @@
   },
   "projects": [
     "WindowsFoundation",
-    "WindowsStorage"
   ],
   "include": [
     "Windows.Foundation",
-    "Windows.Storage"
   ],
   "exclude": [
 
