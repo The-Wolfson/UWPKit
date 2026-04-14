@@ -23,7 +23,7 @@ let targets: [Namespace] = [
     Namespace(name: "WindowsStorage", includes: ["Windows.Storage"])
 ]
 
-let scriptDir = URL(fileURLWithPath: #filePath).deletingLastPathComponent().path
+let scriptDir = FileManager.default.currentDirectoryPath
 let packagesDir = "\(scriptDir)/.packages"
 let generatedDir = "\(scriptDir)/.generated"
 let sourcesDir = "\(scriptDir)/Sources"
