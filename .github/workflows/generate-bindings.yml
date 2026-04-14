@@ -23,7 +23,7 @@ jobs:
 
       - name: Generate Bindings
         run: |
-          swiftc .\generateBindings.swift
+          swiftc .\generateBindings.swift -o generateBindings.exe
           .\generateBindings.exe
         
       - name: Swift Build
