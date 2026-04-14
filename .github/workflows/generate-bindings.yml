@@ -22,7 +22,7 @@ jobs:
       - name: Generate Bindings
         shell: pwsh
         run: |
-            swiftc generateBindings.swift -o generateBindings.exe
+            swiftc -v generateBindings.swift -o generateBindings.exe
             .\generateBindings.exe
 
         
