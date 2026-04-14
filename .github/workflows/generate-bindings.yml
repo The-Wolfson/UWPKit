@@ -18,10 +18,12 @@ jobs:
         with:
           swift-version: swift-6.3-release
           swift-build: 6.3-RELEASE
-
+          
       - name: Generate Bindings
         shell: pwsh
-        run: swift -v generateBindings.swift
+        run: |
+          swiftc generateBindings.swift -o generateBindings.exe
+          .\generateBindings.exe
         
       - name: Swift Build
         shell: pwsh
