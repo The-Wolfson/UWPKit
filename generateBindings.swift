@@ -1,3 +1,5 @@
+print("Staarting Generation")
+
 import Foundation
 
 struct Namespace {
