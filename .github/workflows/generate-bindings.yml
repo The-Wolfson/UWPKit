@@ -22,7 +22,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
 
       - name: Generate Bindings
-        run: swiftc generateBindings.swift -o generateBindings.exe
+        run: swift generateBindings.swift
         
       - name: Swift Build
         shell: pwsh
