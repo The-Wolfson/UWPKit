@@ -54,12 +54,30 @@ var packageSwift = """
 
 // MARK: - NuGet
 
+func download(url: URL, to path: String) throws {
+    var downloadError: Error?
+
+    URLSession.shared.dataTask(with: url) { data, _, error in
+        defer { semaphore.signal() }
+        if let error {
+            downloadError = error
+            return
+        }
+        do {
+            try data?.write(to: URL(fileURLWithPath: path))
+        } catch {
+            downloadError = error
+        }
+    }.resume()
+
+    if let downloadError { throw downloadError }
+}
+
 func restoreNuGet() throws {
     let nuGetPath = (ProcessInfo.processInfo.environment["TEMP"] ?? "/tmp") + "/nuget.exe"
     if !FileManager.default.fileExists(atPath: nuGetPath) {
         let url = URL(string: "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe")!
-        let data = try Data(contentsOf: url)
-        try data.write(to: URL(fileURLWithPath: nuGetPath))
+        try download(url: url, to: URL(fileURLWithPath: nuGetPath))
     }
 
     let content = """
