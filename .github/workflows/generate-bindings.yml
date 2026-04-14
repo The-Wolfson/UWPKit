@@ -21,10 +21,7 @@ jobs:
 
       - name: Generate Bindings
         shell: pwsh
-        run: |
-            swiftc -v generateBindings.swift -o generateBindings.exe
-            .\generateBindings.exe
-
+        run: swiftc -v generateBindings.swift
         
       - name: Swift Build
         shell: pwsh
