@@ -188,6 +188,7 @@ func shell(_ args: String...) -> Int32 {
 enum ScriptError: Error {
     case nugetFailed(Int32)
     case swiftWinRTFailed(Int32)
+    case downloadFailed
 }
 
 // MARK: - Main
