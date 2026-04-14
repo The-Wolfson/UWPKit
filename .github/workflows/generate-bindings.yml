@@ -18,12 +18,11 @@ jobs:
         with:
           swift-version: swift-6.3-release
           swift-build: 6.3-RELEASE
-          
+
+      - uses: ilammy/msvc-dev-cmd@v1
+
       - name: Generate Bindings
-        shell: pwsh
-        run: |
-          swiftc generateBindings.swift -o generateBindings.exe
-          .\generateBindings.exe
+        run: swiftc generateBindings.swift -o generateBindings.exe
         
       - name: Swift Build
         shell: pwsh
