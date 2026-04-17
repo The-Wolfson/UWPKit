@@ -32,7 +32,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "WindowsFoundation", dependencies: [
-            .product(name: "CWinRT"),
+            "CWinRT",
         ]),
         .target(name: "CWinRT"),
 
@@ -130,16 +130,18 @@ def copy_generated_namespace(namespace):
 def modify_package(package_swift: str, namespace) -> str:
     name = namespace["name"]
     library = f'        .library(name: "{name}", type: .dynamic, targets: ["{name}"]),'
-    target = f'        .target(name: "{name}", dependencies: [.product(name: "CWinRT"), .product(name: "WindowsFoundation")]),'
+    target = f'        .target(name: "{name}", dependencies: ["CWinRT", "WindowsFoundation"]),'
+
+    commented = f"/// {PLACEHOLDER}"
 
     package_swift = package_swift.replace(
-        PLACEHOLDER, f"{library}\n\n        /// {PLACEHOLDER}", 1
+        commented, f"{library}\n\n        {commented}", 1
     )
-    last = package_swift.rfind(PLACEHOLDER)
+    last = package_swift.rfind(commented)
     package_swift = (
         package_swift[:last]
-        + f"{target}\n\n        /// {PLACEHOLDER}"
-        + package_swift[last + len(PLACEHOLDER):]
+        + f"{target}\n\n        {commented}"
+        + package_swift[last + len(commented):]
     )
     return package_swift
 
