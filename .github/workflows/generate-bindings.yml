@@ -10,21 +10,17 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
       - name: Install Swift
         uses: compnerd/gha-setup-swift@main
         with:
           swift-version: swift-6.3-release
           swift-build: 6.3-RELEASE
 
-      - uses: ilammy/msvc-dev-cmd@v1
-
+      - name: Checkout
+        uses: actions/checkout@v6
+        
       - name: Generate Bindings
-        run: |
-          swiftc -v .\generateBindings.swift -o generateBindings.exe
-          .\generateBindings.exe
+        run: python generate_bindings.py
         
       - name: Swift Build
         shell: pwsh
