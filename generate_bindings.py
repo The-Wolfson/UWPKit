@@ -77,7 +77,7 @@ def winmd_paths():
 
 
 def foundation_rsp(winmds):
-    lines = [f"-output {GENERATED_DIR}", "-include Windows.Foundation"]
+    lines = [f"-output {GENERATED_DIR}", "-include Windows.Foundation Windows.Foundation.Collections Windows.Foundation.Numerics"]
     lines += [f"-input {p}" for p in winmds]
     return "\n".join(lines)
 
